@@ -39,12 +39,15 @@ public:
     Tile()
     {
         suit = dots;
+        num = ONE;
+        altered = false;
     }
     // EFFECTS init piece with suit and num
     Tile(Suit suit, Num num)
     {
         this->suit = suit;
         this->num = num;
+        altered = false;
     }
 
     // EFFECTS Return Suit
@@ -58,9 +61,22 @@ public:
     {
         return num;
     }
+    
+    // EFFECTS Return altered
+    bool get_altered() const
+    {
+        return altered;
+    }
+
+    void set_altered()
+    {
+        // could do !altered but could lead to many bugs
+        altered = true;
+    }
 private:
     Suit suit;
-    Num num;
+    Num num; 
+    bool altered; // if the card is still playable
 };
 
 /* EFFECTS

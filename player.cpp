@@ -30,6 +30,7 @@ public:
     {
         return name;
     }
+
 private:
     string name;
 };
@@ -50,10 +51,68 @@ public:
     }
     Tile play_tile()
     {
-
     }
+    // REQUIRES Tile 'a' is a valid Tile
+    // EFFECTS Check if there are two copies of the same card in the player hand
+    bool can_pong(Tile a)
+    {
+        return find_card_amt(a) == 2;
+    }
+    // REQUIRES Tile 'a' is a valid Tile
+    // EFFECTS Check if there are three copies of the same card in the player hand
+    bool can_kong(Tile a)
+    {
+        return find_card_amt(a) == 3;
+    }
+    //REQUIRES Tile 'a' is a valid Tile
+    //EFFECTS 
+    bool can_chow(Tile a)
+    {
+        if (a.get_num() == 1)
+        {
+            ;
+        }
+        
+    }
+    int find_card_amt(Tile a)
+    {
+        int count = 0;
+        for (int b = 0; b < hand.size(); b++)
+        {
+            if (tile_comp(a, hand[b]) == 0)
+            {
+                count++;
+            }
+        }
+        return count;
+    }
+    bool has_card(Tile a)
+    {
+        for (int b = 0; b < hand.size(); b++)
+        {
+            if (tile_comp(a, hand[b]) == 0)
+            {
+                return true;
+            }
+        }
+    }
+
 private:
     string name;
     vector<Tile> hand;
-    
+    void sort_hand()
+    {
+        for (int b = 0; b < hand.size(); b++)
+        {
+            for (int a = 0; a < hand.size() - 1; a++)
+            {
+                if (tile_comp(hand[a], hand[b]) < 0)
+                {
+                    Tile temp = hand[a];
+                    hand[a] = hand[a + 1];
+                    hand[a + 1] = temp;
+                }
+            }
+        }
+    }
 };
